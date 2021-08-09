@@ -2,6 +2,9 @@
 # This is a YAML-formatted file.
 # Declare variables to be passed into your templates.
 
+# -- Use the [Infracost CLI](https://github.com/infracost/infracost/blob/master/README.md#quick-start) `infracost register` command to get an API key so your self-hosted Cloud Pricing API can download the latest pricing data from us.
+infracostAPIKey: ""
+
 image:
   # -- Cloud Pricing API image
   repository: infracost/cloud-pricing-api
@@ -101,6 +104,8 @@ api:
   # -- A 32 character API token that your Infracost CLI users will use to authenticate when calling your self-hosted Cloud Pricing API. If left empty, the helm chat will generate one for you.
   # --  If you ever need to rotate the API key, you can simply update `self-hosted-infracost-api-key` in the `cloud-pricing-api` secret and restart the application.
   selfHostedInfracostAPIKey: ""
+  # -- Set this to true to opt-out of telemetry
+  disableTelemetry: false
 
   # -- Replica count
   replicaCount: 1
@@ -169,8 +174,6 @@ api:
   # terminationGracePeriodSeconds: 60
 
 job:
-  # -- Use the [Infracost CLI](https://github.com/infracost/infracost/blob/master/README.md#quick-start) `infracost register` command to get an API key so your self-hosted Cloud Pricing API can download the latest pricing data from us.
-  infracostAPIKey: ""
   # -- Run the job as a one-off on deploy
   runInitJob: true
   # -- Job backoff limit

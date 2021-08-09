@@ -19,8 +19,6 @@ spec:
           annotations:
             {{- toYaml . | nindent 12 }}
           {{- end }}
-          labels:
-            {{- include "cloud-pricing-api.selectorLabels" . | nindent 12 }}
         spec:
           {{- with .Values.imagePullSecrets }}
           imagePullSecrets:

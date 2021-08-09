@@ -68,6 +68,7 @@ The best way to get instructions for configuring Infracost to use the self-hoste
 | api.autoscaling.maxReplicas | int | `10` | The maximum replicas for the API autoscaler |
 | api.autoscaling.minReplicas | int | `1` | The minimum replicas for the API autoscaler |
 | api.autoscaling.targetCPUUtilizationPercentage | int | `80` | The target CPU threshold for the API autoscaler |
+| api.disableTelemetry | bool | `false` | Set this to true to opt-out of telemetry |
 | api.livenessProbe.enabled | bool | `true` | Enable the liveness probe |
 | api.livenessProbe.failureThreshold | int | `3` | The liveness probe failure threshold |
 | api.livenessProbe.initialDelaySeconds | int | `5` | The liveness probe initial delay seconds |
@@ -90,6 +91,7 @@ The best way to get instructions for configuring Infracost to use the self-hoste
 | image.repository | string | `"infracost/cloud-pricing-api"` | Cloud Pricing API image |
 | image.tag | string | `""` | Overrides the image tag whose default is the chart appVersion. |
 | imagePullSecrets | list | `[]` | Any image pull secrets |
+| infracostAPIKey | string | `""` | Use the [Infracost CLI](https://github.com/infracost/infracost/blob/master/README.md#quick-start) `infracost register` command to get an API key so your self-hosted Cloud Pricing API can download the latest pricing data from us. |
 | ingress.annotations | object | `{}` | Ingress annotation |
 | ingress.enabled | bool | `false` | Enable the ingress controller resource |
 | ingress.hosts[0].host | string | `"cloud-pricing-api.local"` | Host name |
@@ -98,7 +100,6 @@ The best way to get instructions for configuring Infracost to use the self-hoste
 | job.affinity | object | `{}` | Job affinity |
 | job.backoffLimit | int | `6` | Job backoff limit |
 | job.failedJobsHistoryLimit | int | `5` | History limit for failed jobs |
-| job.infracostAPIKey | string | `""` | Use the [Infracost CLI](https://github.com/infracost/infracost/blob/master/README.md#quick-start) `infracost register` command to get an API key so your self-hosted Cloud Pricing API can download the latest pricing data from us. |
 | job.nodeSelector | object | `{}` | Job node selector |
 | job.resources | object | `{}` | Job resource limits and requests, our recommendations are commented-out per Helm best practices. |
 | job.runInitJob | bool | `true` | Run the job as a one-off on deploy |

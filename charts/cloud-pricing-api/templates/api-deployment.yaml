@@ -80,6 +80,11 @@ spec:
                 secretKeyRef:
                   name: {{ include "cloud-pricing-api.postgresql.secretName" . }}
                   key: postgresql-password
+            - name: INFRACOST_API_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "cloud-pricing-api.fullname" . }}
+                  key: infracost-api-key
             {{- if not .Values.api.disableSelfHostedInfracostAPIKey }}
             - name: SELF_HOSTED_INFRACOST_API_KEY
               valueFrom:
@@ -87,6 +92,8 @@ spec:
                   name: {{ include "cloud-pricing-api.fullname" . }}
                   key: self-hosted-infracost-api-key
             {{- end }}
+            - name: DISABLE_TELEMETRY
+              value: {{ .Values.api.disableTelemetry | quote }}
             {{- if .Values.extraEnv }}
             {{- toYaml .Values.extraEnv | nindent 12 }}
             {{- end }}
