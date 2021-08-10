@@ -20,6 +20,8 @@ Installing the chart will create three pods: PostgreSQL DB, Cloud Pricing API, a
 
   We recommend you create an [ingress route](#install-in-aws-with-alb-ingress) so your Infracost CLI users can connect to your self-hosted Cloud Pricing API.
 
+  Regardless of you using ingress or port-forward, the home page for the Cloud Pricing API, [**http://localhost:4000**](http://localhost:4000), shows if prices are up-to-date and some statistics.
+
 Uninstalling the chart will not delete the PVC used by the PostgreSQL DB.
 
   ```sh
@@ -33,18 +35,25 @@ The best way to get instructions for configuring Infracost to use the self-hoste
 1. If you don't have ingress enabled you can port-forward the Cloud Pricing API to your local machine by doing this:
     ```sh
     export NAMESPACE=my-namespace
+    echo "Your self-hosted Infracost API key is $(kubectl get secret --namespace $NAMESPACE cloud-pricing-api --template="{{"{{"}} index .data \"self-hosted-infracost-api-key\" {{"}}"}}" | base64 -D)"
     export POD_NAME=$(kubectl get pods --namespace $NAMESPACE -l "app.kubernetes.io/name=cloud-pricing-api,app.kubernetes.io/instance=cloud-pricing-api" -o jsonpath="{.items[0].metadata.name}")
     export CONTAINER_PORT=$(kubectl get pod --namespace $NAMESPACE $POD_NAME -o jsonpath="{.spec.containers[0].ports[0].containerPort}")
     kubectl --namespace $NAMESPACE port-forward $POD_NAME 4000:$CONTAINER_PORT
     ```
 
-2. You can then configure the Infracost CLI to use the self-hosted Cloud Pricing API using the following two environment variables. Your Infracost CLI users will use the API key to authenticate when calling your self-hosted Cloud Pricing API
+2. When using the CLI locally, run the following two required commands to point your CLI to your self-hosted Cloud Pricing API. Your Infracost CLI users will use the API key to authenticate when calling your self-hosted Cloud Pricing API.
     ```sh
-    export INFRACOST_PRICING_API_ENDPOINT=http://localhost:4000
-
-    export INFRACOST_API_KEY=$(kubectl get secret --namespace $NAMESPACE cloud-pricing-api --template="{{"{{"}} index .data \"self-hosted-infracost-api-key\" {{"}}"}}" | base64 -D)
+    infracost configure set pricing_api_endpoint http://localhost:4000
+    infracost configure set api_key API_KEY_FROM_ABOVE
 
     infracost breakdown --path /path/to/code
+    ```
+
+3. In CI/CD systems, set the following two required environment variables:
+
+    ```sh
+    export INFRACOST_PRICING_API_ENDPOINT=http://endpoint
+    export INFRACOST_API_KEY=API_KEY_FROM_ABOVE
     ```
 
 ## Prerequisites
@@ -114,6 +123,17 @@ helm install cloud-pricing-api infracost/cloud-pricing-api \
   --set ingress.annotations."alb\.ingress\.kubernetes\.io/healthcheck-path"=/health
   --set-string ingress.annotations."alb\.ingress\.kubernetes\.io/listen-ports"="\[\{\"HTTP\": 80\}\, \{\"HTTPS\":443\}\]" \
   --set-string ingress.annotations."alb\.ingress\.kubernetes\.io/ssl-redirect"="\{\"Type\": \"redirect\"\, \"RedirectConfig\": \{ \"Protocol\": \"HTTPS\"\, \"Port\": \"443\"\, \"StatusCode\": \"HTTP_301\"\}\}"
+```
+
+## Upgrade to latest version
+
+Use the following commands to upgrade to the latest released version of the Cloud Pricing API and Helm chart; you should pass-in any variables that you set during install with `--set`:
+```
+kubectl delete job -n my-namespace hosted-cloud-pricing-api-init-job
+
+helm upgrade cloud-pricing-api infracost/cloud-pricing-api \
+    --set job.infracostAPIKey="YOUR_INFRACOST_API_KEY_HERE" \
+    --set postgresql.postgresqlPassword="STRONG_PASSWORD_HERE"
 ```
 
 ## Development

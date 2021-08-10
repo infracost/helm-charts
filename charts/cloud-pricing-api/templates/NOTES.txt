@@ -34,10 +34,11 @@ export POD_NAME=$(kubectl get pods --namespace {{ .Release.Namespace }} -l "app.
 export CONTAINER_PORT=$(kubectl get pod --namespace {{ .Release.Namespace }} $POD_NAME -o jsonpath="{.spec.containers[0].ports[0].containerPort}")
 {{- end }}
 export INFRACOST_API_KEY=$(kubectl get secret --namespace {{ .Release.Namespace }} {{ include "cloud-pricing-api.name" . }} --template="{{"{{"}} index .data \"self-hosted-infracost-api-key\" {{"}}"}}" {{"|"}} base64 -D)
-echo "\nTo use this with your Infracost CLI run:\n"
-echo "export INFRACOST_PRICING_API_ENDPOINT={{ index $urls 0 }}"
-echo "export INFRACOST_API_KEY=$INFRACOST_API_KEY"
+echo "\nTo use this with your Infracost CLI locally, run:\n"
+echo "infracost configure set pricing_api_endpoint {{ index $urls 0 }}"
+echo "infracost configure set api_key $INFRACOST_API_KEY"
 echo "infracost breakdown --path /path/to/code\n"
+echo "In CI/CD systems, set the environment variables INFRACOST_PRICING_API_ENDPOINT and INFRACOST_API_KEY.\n"
 
 {{- if (and (not .Values.ingress.enabled) (contains "ClusterIP" .Values.service.type)) }}
 kubectl --namespace {{ .Release.Namespace }} port-forward $POD_NAME 4000:$CONTAINER_PORT
