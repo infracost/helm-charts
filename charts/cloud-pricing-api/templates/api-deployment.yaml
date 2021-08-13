@@ -92,6 +92,8 @@ spec:
                   name: {{ include "cloud-pricing-api.fullname" . }}
                   key: self-hosted-infracost-api-key
             {{- end }}
+            - name: LOG_LEVEL
+              value: {{ .Values.api.logLevel | quote }}
             - name: DISABLE_TELEMETRY
               value: {{ .Values.api.disableTelemetry | quote }}
             {{- if .Values.extraEnv }}

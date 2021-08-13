@@ -106,6 +106,8 @@ api:
   selfHostedInfracostAPIKey: ""
   # -- Set this to true to opt-out of telemetry
   disableTelemetry: false
+  # -- Set this to debug, info, warn or error
+  logLevel: info
 
   # -- Replica count
   replicaCount: 1
@@ -180,6 +182,8 @@ job:
   backoffLimit: 6
   # -- Job schedule
   schedule: "0 4 * * SUN"
+    # -- Set this to debug, info, warn or error
+  logLevel: info
   # -- History limit for successful jobs
   successfulJobsHistoryLimit: 5
   # -- History limit for failed jobs
