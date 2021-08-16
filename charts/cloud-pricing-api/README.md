@@ -73,7 +73,7 @@ The best way to get instructions for configuring Infracost to use the self-hoste
 | Key | Type | Default | Description |
 |-----|------|---------|-------------|
 | api.affinity | object | `{}` | API affinity |
-| api.autoscaling.enabled | bool | `false` | Create a HorizontalPodAutoscaler for the API  |
+| api.autoscaling.enabled | bool | `false` | Create a HorizontalPodAutoscaler for the API |
 | api.autoscaling.maxReplicas | int | `10` | The maximum replicas for the API autoscaler |
 | api.autoscaling.minReplicas | int | `1` | The minimum replicas for the API autoscaler |
 | api.autoscaling.targetCPUUtilizationPercentage | int | `80` | The target CPU threshold for the API autoscaler |
@@ -93,7 +93,7 @@ The best way to get instructions for configuring Infracost to use the self-hoste
 | api.readinessProbe.successThreshold | int | `1` | The readiness probe success threshold |
 | api.readinessProbe.timeoutSeconds | int | `2` | The readiness probe timeout seconds |
 | api.replicaCount | int | `1` | Replica count |
-| api.resources | object | `{}` | API resource limits and requests, our recommendations are commented-out per Helm best practices. |
+| api.resources | object | `{"limits":{"cpu":"1","memory":"512Mi"},"requests":{"cpu":"50m","memory":"64Mi"}}` | API resource limits and requests, our request recommendations are based on minimal requirements and the limit recommendations are based on usage in a high-traffic production environment. If you are running on environments like Minikube you may wish to remove these recommendations. |
 | api.selfHostedInfracostAPIKey | string | `""` | A 32 character API token that your Infracost CLI users will use to authenticate when calling your self-hosted Cloud Pricing API. If left empty, the helm chat will generate one for you. --  If you ever need to rotate the API key, you can simply update `self-hosted-infracost-api-key` in the `cloud-pricing-api` secret and restart the application. |
 | api.tolerations | list | `[]` | API tolerations |
 | fullnameOverride | string | `""` | Full name override for the deployed app |
@@ -112,7 +112,7 @@ The best way to get instructions for configuring Infracost to use the self-hoste
 | job.failedJobsHistoryLimit | int | `5` | History limit for failed jobs |
 | job.logLevel | string | `"info"` | Set this to debug, info, warn or error |
 | job.nodeSelector | object | `{}` | Job node selector |
-| job.resources | object | `{}` | Job resource limits and requests, our recommendations are commented-out per Helm best practices. |
+| job.resources | object | `{"limits":{"cpu":"200m","memory":"640Mi"},"requests":{"cpu":"50m","memory":"128Mi"}}` | Job resource limits and requests. If you are running on environments like Minikube you may wish to remove these recommendations. |
 | job.runInitJob | bool | `true` | Run the job as a one-off on deploy |
 | job.schedule | string | `"0 4 * * SUN"` | Job schedule |
 | job.startingDeadlineSeconds | int | `3600` | Deadline seconds for the job starting |

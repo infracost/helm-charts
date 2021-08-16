@@ -38,11 +38,13 @@ serviceAccount:
 podAnnotations: {}
 
 # -- The pod security context
-podSecurityContext: {}
+podSecurityContext:
+  {}
   # fsGroup: 2000
 
 # -- The container security context
-securityContext: {}
+securityContext:
+  {}
   # capabilities:
   #   drop:
   #   - ALL
@@ -60,7 +62,8 @@ ingress:
   # -- Enable the ingress controller resource
   enabled: false
   # -- Ingress annotation
-  annotations: {}
+  annotations:
+    {}
     # kubernetes.io/ingress.class: nginx
     # kubernetes.io/tls-acme: "true"
   # extraPaths:
@@ -72,8 +75,8 @@ ingress:
     - # -- Host name
       host: cloud-pricing-api.local
       paths:
-      - # -- Path for host
-        path: /
+        - # -- Path for host
+          path: /
 
   # -- TLS configuration
   tls: []
@@ -91,7 +94,7 @@ postgresql:
   # -- Name of the PostgreSQL database
   postgresqlDatabase: cloudpricingapi
   # -- Name of the PostgreSQL user
-  postgresqlUsername: cloudpricingapi  
+  postgresqlUsername: cloudpricingapi
   # -- Details of external PostgreSQL server, such as AWS RDS, to use (assuming you've set postgresql.enabled to false)
   external: {}
   #   host:
@@ -138,9 +141,9 @@ api:
     failureThreshold: 3
     # -- The readiness probe success threshold
     successThreshold: 1
-  
+
   autoscaling:
-    # -- Create a HorizontalPodAutoscaler for the API 
+    # -- Create a HorizontalPodAutoscaler for the API
     enabled: false
     # -- The minimum replicas for the API autoscaler
     minReplicas: 1
@@ -151,18 +154,15 @@ api:
     # -- The target memory threshold for the API autoscaler
     # targetMemoryUtilizationPercentage: 80
 
-  # -- API resource limits and requests, our recommendations are commented-out per Helm best practices.
-  resources: {}
-    # We usually recommend not to specify default resources and to leave this as a conscious
-    # choice for the user. This also increases chances charts run on environments with little
-    # resources, such as Minikube. If you do want to specify resources, uncomment the following
-    # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
-    # limits:
-    #   cpu: "1"
-    #   memory: 600Mi
-    # requests:
-    #   cpu: 500m
-    #   memory: 300Mi
+  # -- API resource limits and requests, our request recommendations are based on minimal requirements and the limit recommendations are based on usage in a high-traffic production environment.
+  # If you are running on environments like Minikube you may wish to remove these recommendations.
+  resources:
+    limits:
+      cpu: "1"
+      memory: 512Mi
+    requests:
+      cpu: 50m
+      memory: 64Mi
 
   # -- API node selector
   nodeSelector: {}
@@ -191,18 +191,15 @@ job:
   # -- Deadline seconds for the job starting
   startingDeadlineSeconds: 3600
 
-  # -- Job resource limits and requests, our recommendations are commented-out per Helm best practices.
-  resources: {}
-    # We usually recommend not to specify default resources and to leave this as a conscious
-    # choice for the user. This also increases chances charts run on environments with little
-    # resources, such as Minikube. If you do want to specify resources, uncomment the following
-    # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
-    # limits:
-    #   cpu: 200m
-    #   memory: 600Mi
-    # requests:
-    #   cpu: 100m
-    #   memory: 300Mi
+  # -- Job resource limits and requests.
+  # If you are running on environments like Minikube you may wish to remove these recommendations.
+  resources:
+    limits:
+      cpu: 200m
+      memory: 640Mi
+    requests:
+      cpu: 50m
+      memory: 128Mi
 
   # -- Job node selector
   nodeSelector: {}
