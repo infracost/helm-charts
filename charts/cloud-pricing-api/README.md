@@ -1,6 +1,6 @@
 # Cloud Pricing API
 
-![Version: 0.2.0](https://img.shields.io/badge/Version-0.2.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: v0.2.0](https://img.shields.io/badge/AppVersion-v0.2.0-informational?style=flat-square)
+![Version: 0.2.1](https://img.shields.io/badge/Version-0.2.1-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: v0.2.1](https://img.shields.io/badge/AppVersion-v0.2.1-informational?style=flat-square)
 
 A Helm chart for running the Infracost [Cloud Pricing API](https://github.com/infracost/cloud-pricing-api).
 
@@ -84,6 +84,7 @@ The best way to get instructions for configuring Infracost to use the self-hoste
 | api.livenessProbe.periodSeconds | int | `5` | The liveness probe period seconds |
 | api.livenessProbe.successThreshold | int | `1` | The liveness probe success threshold |
 | api.livenessProbe.timeoutSeconds | int | `2` | The liveness probe timeout seconds |
+| api.logLevel | string | `"info"` | Set this to debug, info, warn or error |
 | api.nodeSelector | object | `{}` | API node selector |
 | api.readinessProbe.enabled | bool | `true` | Enable the readiness probe |
 | api.readinessProbe.failureThreshold | int | `3` | The readiness probe failure threshold |
@@ -109,6 +110,7 @@ The best way to get instructions for configuring Infracost to use the self-hoste
 | job.affinity | object | `{}` | Job affinity |
 | job.backoffLimit | int | `6` | Job backoff limit |
 | job.failedJobsHistoryLimit | int | `5` | History limit for failed jobs |
+| job.logLevel | string | `"info"` | Set this to debug, info, warn or error |
 | job.nodeSelector | object | `{}` | Job node selector |
 | job.resources | object | `{}` | Job resource limits and requests, our recommendations are commented-out per Helm best practices. |
 | job.runInitJob | bool | `true` | Run the job as a one-off on deploy |
