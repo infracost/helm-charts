@@ -17,13 +17,13 @@ deployment:
     # -- Overrides the image tag whose default is the chart appVersion.
     tag: ""
     # -- Kubernetes default resources
-    resources:
-      limits:
-        cpu: 150m
-        memory: 128Mi
-      requests:
-        cpu: 50m
-        memory: 64Mi
+  resources:
+    limits:
+      cpu: 150m
+      memory: 128Mi
+    requests:
+      cpu: 50m
+      memory: 64Mi
 
 # -- Any image pull secrets
 imagePullSecrets: []
