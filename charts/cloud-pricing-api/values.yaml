@@ -5,16 +5,25 @@
 # -- Use the [Infracost CLI](https://github.com/infracost/infracost/blob/master/README.md#quick-start) `infracost register` command to get an API key so your self-hosted Cloud Pricing API can download the latest pricing data from us.
 infracostAPIKey: ""
 
-image:
-  # -- Cloud Pricing API image
-  repository: infracost/cloud-pricing-api
+deployment:
+  image:
+    # -- Cloud Pricing API image
+    repository: infracost/cloud-pricing-api
 
-  # -- Image pull policy
-  # pullPolicy: IfNotPresent
-  pullPolicy: Always
+    # -- Image pull policy
+    # pullPolicy: IfNotPresent
+    pullPolicy: Always
 
-  # -- Overrides the image tag whose default is the chart appVersion.
-  tag: ""
+    # -- Overrides the image tag whose default is the chart appVersion.
+    tag: ""
+    # -- Kubernetes default resources
+    resources:                                                                                                                                                                                                   │
+      limits:                                                                                                                                                                                                    │
+        cpu: 150m                                                                                                                                                                                                │
+        memory: 128Mi                                                                                                                                                                                            │
+      requests:                                                                                                                                                                                                  │
+        cpu: 50m                                                                                                                                                                                                 │
+        memory: 64Mi
 
 # -- Any image pull secrets
 imagePullSecrets: []

@@ -32,10 +32,17 @@ spec:
       {{- end }}
       containers:
         - name: {{ .Chart.Name }}
+          resources:
+           limits:
+             cpu: {{ .Values.deployment.resources.limits.cpu }}
+             memory: {{ .Values.deployment.resources.limit.memory }}
+           requests:
+             cpu: {{ .Values.deployment.resources.requests.cpu }}
+             memory: {{ .Values.deployment.resources.requests.memory }}
           securityContext:
             {{- toYaml .Values.securityContext | nindent 12 }}
-          image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
-          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          image: "{{ .Values.deployment.image.repository }}:{{ .Values.deployment.image.tag | default .Chart.AppVersion }}"
+          imagePullPolicy: {{ .Values.deployment.image.pullPolicy }}
           ports:
             - name: http
               containerPort: 4000
