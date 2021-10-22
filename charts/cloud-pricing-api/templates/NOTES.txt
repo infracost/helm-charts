@@ -3,7 +3,7 @@
 {{- if .Values.ingress.enabled }}
 Run the following to retrieve the connection details for the Cloud Pricing API:
 {{- "\n" }}
-{{- $https := or $.Values.ingress.tls (contains (index $.Values.ingress.annotations "kubernetes.io/listen-ports" | default "") "HTTPS") -}}
+{{- $https := or (empty $.Values.ingress.tls | not) (contains (index $.Values.ingress.annotations "kubernetes.io/listen-ports" | default "") "HTTPS") -}}
 {{- range $host := .Values.ingress.hosts }}
   {{- range .paths }}
   {{- $url := printf "http%s://%s%s" ($https | ternary "s" "") $host.host (.path | trimSuffix "*" | trimSuffix "/") -}}
