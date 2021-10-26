@@ -190,8 +190,8 @@ job:
   failedJobsHistoryLimit: 5
   # -- Deadline seconds for the job starting
   startingDeadlineSeconds: 3600
-  # -- Limits the lifetime of a Job that has finished execution. If specifying the ttlSecondAfterFinished, the init job is deleted no matter if the job is succesfull or failed after the ttl. This avoid the helm upgrade process to fail.
-  # ttlSecondsAfterFinished: 10
+  # -- (int) Marks the jobs as eligible for automatic cleanup after the job has finished and the TTL has expired, whether the job is successful or failed. This avoids the need to delete the init job before upgrading the Helm chart.
+  ttlSecondsAfterFinished:
 
   # -- Job resource limits and requests.
   # If you are running on environments like Minikube you may wish to remove these recommendations.
