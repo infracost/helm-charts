@@ -118,6 +118,7 @@ The best way to get instructions for configuring Infracost to use the self-hoste
 | job.startingDeadlineSeconds | int | `3600` | Deadline seconds for the job starting |
 | job.successfulJobsHistoryLimit | int | `5` | History limit for successful jobs |
 | job.tolerations | list | `[]` | Job tolerations |
+| job.ttlSecondsAfterFinished | int | `nil` | Marks the jobs as eligible for automatic cleanup after the job has finished and the TTL has expired, whether the job is successful or failed. This avoids the need to delete the init job before upgrading the Helm chart. |
 | nameOverride | string | `""` | Name override for the deployed app |
 | podAnnotations | object | `{}` | Any pod annotations |
 | podSecurityContext | object | `{}` | The pod security context |
