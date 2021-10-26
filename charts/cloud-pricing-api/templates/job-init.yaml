@@ -7,6 +7,9 @@ metadata:
     {{- include "cloud-pricing-api.labels" . | nindent 4 }}
 spec:
   backoffLimit: {{ .Values.job.backoffLimit }}
+  {{- if .Values.job.ttlSecondsAfterFinished | quote }}
+  ttlSecondsAfterFinished: {{ .Values.job.ttlSecondsAfterFinished }}
+  {{- end }}
   template:
     metadata:
       {{- with .Values.podAnnotations }}
