@@ -1,6 +1,6 @@
 # Cloud Pricing API
 
-![Version: 0.4.2](https://img.shields.io/badge/Version-0.4.2-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: v0.3.1](https://img.shields.io/badge/AppVersion-v0.3.1-informational?style=flat-square)
+![Version: 0.4.3](https://img.shields.io/badge/Version-0.4.3-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: v0.3.1](https://img.shields.io/badge/AppVersion-v0.3.1-informational?style=flat-square)
 
 A Helm chart for running the Infracost [Cloud Pricing API](https://github.com/infracost/cloud-pricing-api).
 
@@ -103,6 +103,7 @@ The best way to get instructions for configuring Infracost to use the self-hoste
 | imagePullSecrets | list | `[]` | Any image pull secrets |
 | infracostAPIKey | string | `""` | Use the [Infracost CLI](https://github.com/infracost/infracost/blob/master/README.md#quick-start) `infracost register` command to get an API key so your self-hosted Cloud Pricing API can download the latest pricing data from us. |
 | ingress.annotations | object | `{}` | Ingress annotation |
+| ingress.className | string | `""` | Ingress class field that replace the kubernetes.io/ingress.class annotation starting at kubernetes 1.18 |
 | ingress.enabled | bool | `false` | Enable the ingress controller resource |
 | ingress.hosts[0].host | string | `"cloud-pricing-api.local"` | Host name |
 | ingress.hosts[0].paths[0].path | string | `"/"` | Path for host |

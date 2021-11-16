@@ -84,6 +84,9 @@ ingress:
   #    hosts:
   #      - cloud-pricing-api.local
 
+  # -- Ingress class field that replace the kubernetes.io/ingress.class annotation starting at kubernetes 1.18
+  className: ""
+
 postgresql:
   # -- Deploy PostgreSQL servers. See [below](#postgresql) for more details
   enabled: true
