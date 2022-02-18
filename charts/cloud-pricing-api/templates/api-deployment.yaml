@@ -31,6 +31,9 @@ spec:
       terminationGracePeriodSeconds: {{ .Values.api.terminationGracePeriodSeconds }}
       {{- end }}
       containers:
+        {{- with .Values.api.extraContainers }}
+          {{- toYaml . | nindent 8 }}
+        {{- end }}
         - name: {{ .Chart.Name }}
           securityContext:
             {{- toYaml .Values.securityContext | nindent 12 }}

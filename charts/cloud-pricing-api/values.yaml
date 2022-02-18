@@ -178,6 +178,9 @@ api:
   # -- The total time for the container to exit normally before being terminated. If specifying the preStopSleepSeconds, this value should be greater than that.
   # terminationGracePeriodSeconds: 60
 
+  # -- API extra sidecar containers
+  extraContainers: []
+
 job:
   # -- Run the job as a one-off on deploy
   runInitJob: true
@@ -212,3 +215,6 @@ job:
   tolerations: []
   # -- Job affinity
   affinity: {}
+
+  # -- Job extra sidecar containers
+  extraContainers: []

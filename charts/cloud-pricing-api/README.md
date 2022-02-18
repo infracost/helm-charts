@@ -1,6 +1,6 @@
 # Cloud Pricing API
 
-![Version: 0.4.6](https://img.shields.io/badge/Version-0.4.6-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: v0.3.3](https://img.shields.io/badge/AppVersion-v0.3.3-informational?style=flat-square)
+![Version: 0.5.0](https://img.shields.io/badge/Version-0.5.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: v0.3.3](https://img.shields.io/badge/AppVersion-v0.3.3-informational?style=flat-square)
 
 A Helm chart for running the Infracost [Cloud Pricing API](https://github.com/infracost/cloud-pricing-api).
 
@@ -78,6 +78,7 @@ The best way to get instructions for configuring Infracost to use the self-hoste
 | api.autoscaling.minReplicas | int | `1` | The minimum replicas for the API autoscaler |
 | api.autoscaling.targetCPUUtilizationPercentage | int | `80` | The target CPU threshold for the API autoscaler |
 | api.disableTelemetry | bool | `false` | Set this to true to opt-out of telemetry |
+| api.extraContainers | list | `[]` | API extra sidecar containers |
 | api.livenessProbe.enabled | bool | `true` | Enable the liveness probe |
 | api.livenessProbe.failureThreshold | int | `3` | The liveness probe failure threshold |
 | api.livenessProbe.initialDelaySeconds | int | `5` | The liveness probe initial delay seconds |
@@ -94,7 +95,7 @@ The best way to get instructions for configuring Infracost to use the self-hoste
 | api.readinessProbe.timeoutSeconds | int | `2` | The readiness probe timeout seconds |
 | api.replicaCount | int | `1` | Replica count |
 | api.resources | object | `{"limits":{"cpu":"1","memory":"512Mi"},"requests":{"cpu":"50m","memory":"64Mi"}}` | API resource limits and requests, our request recommendations are based on minimal requirements and the limit recommendations are based on usage in a high-traffic production environment. If you are running on environments like Minikube you may wish to remove these recommendations. |
-| api.selfHostedInfracostAPIKey | string | `""` | A 32 character API token that your Infracost CLI users will use to authenticate when calling your self-hosted Cloud Pricing API. If left empty, the helm chat will generate one for you. --  If you ever need to rotate the API key, you can simply update `self-hosted-infracost-api-key` in the `cloud-pricing-api` secret and restart the application. |
+| api.selfHostedInfracostAPIKey | string | `""` | If you ever need to rotate the API key, you can simply update `self-hosted-infracost-api-key` in the `cloud-pricing-api` secret and restart the application. |
 | api.tolerations | list | `[]` | API tolerations |
 | fullnameOverride | string | `""` | Full name override for the deployed app |
 | image.pullPolicy | string | `"Always"` | Image pull policy pullPolicy: IfNotPresent |
@@ -110,6 +111,7 @@ The best way to get instructions for configuring Infracost to use the self-hoste
 | ingress.tls | list | `[]` | TLS configuration |
 | job.affinity | object | `{}` | Job affinity |
 | job.backoffLimit | int | `6` | Job backoff limit |
+| job.extraContainers | list | `[]` | Job extra sidecar containers |
 | job.failedJobsHistoryLimit | int | `5` | History limit for failed jobs |
 | job.logLevel | string | `"info"` | Set this to debug, info, warn or error |
 | job.nodeSelector | object | `{}` | Job node selector |
@@ -199,7 +201,7 @@ helm install cloud-pricing-api infracost/cloud-pricing-api \
 
 Use the following commands to upgrade to the latest released version of the Cloud Pricing API and Helm chart; you should pass-in any variables that you set during install with `--set`:
 ```
-kubectl delete job -n my-namespace cloud-pricing-api-init-job
+kubectl delete job -n my-namespace hosted-cloud-pricing-api-init-job
 
 helm upgrade cloud-pricing-api infracost/cloud-pricing-api \
     --set infracostAPIKey="YOUR_INFRACOST_API_KEY_HERE" \
