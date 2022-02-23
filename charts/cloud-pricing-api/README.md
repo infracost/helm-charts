@@ -95,7 +95,7 @@ The best way to get instructions for configuring Infracost to use the self-hoste
 | api.readinessProbe.timeoutSeconds | int | `2` | The readiness probe timeout seconds |
 | api.replicaCount | int | `1` | Replica count |
 | api.resources | object | `{"limits":{"cpu":"1","memory":"512Mi"},"requests":{"cpu":"50m","memory":"64Mi"}}` | API resource limits and requests, our request recommendations are based on minimal requirements and the limit recommendations are based on usage in a high-traffic production environment. If you are running on environments like Minikube you may wish to remove these recommendations. |
-| api.selfHostedInfracostAPIKey | string | `""` | If you ever need to rotate the API key, you can simply update `self-hosted-infracost-api-key` in the `cloud-pricing-api` secret and restart the application. |
+| api.selfHostedInfracostAPIKey | string | `""` | A 32 character API token that your Infracost CLI users will use to authenticate when calling your self-hosted Cloud Pricing API. If left empty, the helm chat will generate one for you. If you ever need to rotate the API key, you can simply update `self-hosted-infracost-api-key` in the `cloud-pricing-api` secret and restart the application. |
 | api.tolerations | list | `[]` | API tolerations |
 | fullnameOverride | string | `""` | Full name override for the deployed app |
 | image.pullPolicy | string | `"Always"` | Image pull policy pullPolicy: IfNotPresent |
@@ -201,7 +201,7 @@ helm install cloud-pricing-api infracost/cloud-pricing-api \
 
 Use the following commands to upgrade to the latest released version of the Cloud Pricing API and Helm chart; you should pass-in any variables that you set during install with `--set`:
 ```
-kubectl delete job -n my-namespace hosted-cloud-pricing-api-init-job
+kubectl delete job -n my-namespace cloud-pricing-api-init-job
 
 helm upgrade cloud-pricing-api infracost/cloud-pricing-api \
     --set infracostAPIKey="YOUR_INFRACOST_API_KEY_HERE" \
