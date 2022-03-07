@@ -78,7 +78,7 @@ ingress:
         - # -- Path for host
           path: /
           # -- Path type for this specific host path. https://kubernetes.io/docs/concepts/services-networking/ingress/#path-types
-          pathType: implementationSpecific
+          pathType: ImplementationSpecific
 
   # -- TLS configuration
   tls: []
