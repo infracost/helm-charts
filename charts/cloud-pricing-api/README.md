@@ -1,6 +1,6 @@
 # Cloud Pricing API
 
-![Version: 0.5.3](https://img.shields.io/badge/Version-0.5.3-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: v0.3.5](https://img.shields.io/badge/AppVersion-v0.3.5-informational?style=flat-square)
+![Version: 0.5.4](https://img.shields.io/badge/Version-0.5.4-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: v0.3.5](https://img.shields.io/badge/AppVersion-v0.3.5-informational?style=flat-square)
 
 A Helm chart for running the Infracost [Cloud Pricing API](https://github.com/infracost/cloud-pricing-api).
 
@@ -108,6 +108,7 @@ The best way to get instructions for configuring Infracost to use the self-hoste
 | ingress.enabled | bool | `false` | Enable the ingress controller resource |
 | ingress.hosts[0].host | string | `"cloud-pricing-api.local"` | Host name |
 | ingress.hosts[0].paths[0].path | string | `"/"` | Path for host |
+| ingress.hosts[0].paths[0].pathType | string | `"implementationSpecific"` | Path type for this specific host path. https://kubernetes.io/docs/concepts/services-networking/ingress/#path-types |
 | ingress.tls | list | `[]` | TLS configuration |
 | job.affinity | object | `{}` | Job affinity |
 | job.backoffLimit | int | `6` | Job backoff limit |
