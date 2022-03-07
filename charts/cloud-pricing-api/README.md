@@ -108,7 +108,7 @@ The best way to get instructions for configuring Infracost to use the self-hoste
 | ingress.enabled | bool | `false` | Enable the ingress controller resource |
 | ingress.hosts[0].host | string | `"cloud-pricing-api.local"` | Host name |
 | ingress.hosts[0].paths[0].path | string | `"/"` | Path for host |
-| ingress.hosts[0].paths[0].pathType | string | `"implementationSpecific"` | Path type for this specific host path. https://kubernetes.io/docs/concepts/services-networking/ingress/#path-types |
+| ingress.hosts[0].paths[0].pathType | string | `"ImplementationSpecific"` | Path type for this specific host path. https://kubernetes.io/docs/concepts/services-networking/ingress/#path-types |
 | ingress.tls | list | `[]` | TLS configuration |
 | job.affinity | object | `{}` | Job affinity |
 | job.backoffLimit | int | `6` | Job backoff limit |
