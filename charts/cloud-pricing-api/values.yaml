@@ -59,6 +59,8 @@ service:
   type: ClusterIP
   # -- Kubernetes service port
   port: 80
+  annotations:
+    {}
 
 ingress:
   # -- Enable the ingress controller resource

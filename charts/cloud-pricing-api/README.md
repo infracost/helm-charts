@@ -1,6 +1,6 @@
 # Cloud Pricing API
 
-![Version: 0.5.4](https://img.shields.io/badge/Version-0.5.4-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: v0.3.5](https://img.shields.io/badge/AppVersion-v0.3.5-informational?style=flat-square)
+![Version: 0.5.5](https://img.shields.io/badge/Version-0.5.5-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: v0.3.5](https://img.shields.io/badge/AppVersion-v0.3.5-informational?style=flat-square)
 
 A Helm chart for running the Infracost [Cloud Pricing API](https://github.com/infracost/cloud-pricing-api).
 
@@ -133,6 +133,7 @@ The best way to get instructions for configuring Infracost to use the self-hoste
 | postgresql.postgresqlUsername | string | `"cloudpricingapi"` | Name of the PostgreSQL user |
 | postgresql.usePasswordFile | bool | `false` | Have the secrets mounted as a file instead of env vars |
 | securityContext | object | `{}` | The container security context |
+| service.annotations | object | `{}` |  |
 | service.port | int | `80` | Kubernetes service port |
 | service.type | string | `"ClusterIP"` | Kubernetes service type |
 | serviceAccount.annotations | object | `{}` | Annotations to add to the service account |
