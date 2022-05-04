@@ -52,6 +52,8 @@ securityContext:
   # runAsNonRoot: true
   # runAsUser: 1000
 
+secretAnnotations: {}
+
 service:
   # -- Kubernetes service type
   type: ClusterIP
