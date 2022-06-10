@@ -103,6 +103,7 @@ The best way to get instructions for configuring Infracost to use the self-hoste
 | image.tag | string | `""` | Overrides the image tag whose default is the chart appVersion. |
 | imagePullSecrets | list | `[]` | Any image pull secrets |
 | infracostAPIKey | string | `""` | Use the [Infracost CLI](https://github.com/infracost/infracost/blob/master/README.md#quick-start) `infracost register` command to get an API key so your self-hosted Cloud Pricing API can download the latest pricing data from us. |
+| existingSecretAPIKey | string | `""` | Point to existing secret with infracostAPIKey in it. This allows to either create a secret directly or use external secrets provider. |
 | ingress.annotations | object | `{}` | Ingress annotation |
 | ingress.className | string | `""` | Ingress class field that replace the kubernetes.io/ingress.class annotation starting at kubernetes 1.18 |
 | ingress.enabled | bool | `false` | Enable the ingress controller resource |
