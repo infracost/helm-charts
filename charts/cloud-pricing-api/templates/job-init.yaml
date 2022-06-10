@@ -58,7 +58,11 @@ spec:
             - name: INFRACOST_API_KEY
               valueFrom:
                 secretKeyRef:
+                  {{- if not .Values.existingSecretAPIKey }}
                   name: {{ include "cloud-pricing-api.fullname" . }}
+                  {{- else }}
+                  name: {{ .Values.apiKey.existingSecret }}
+                  {{- end }}
                   key: infracost-api-key
             {{- if not .Values.api.disableSelfHostedInfracostAPIKey }}
             - name: SELF_HOSTED_INFRACOST_API_KEY
