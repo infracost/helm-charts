@@ -118,7 +118,6 @@ api:
   # -- A 32 character API token that your Infracost CLI users will use to authenticate when calling your self-hosted Cloud Pricing API. If left empty, the helm chat will generate one for you.
   # If you ever need to rotate the API key, you can simply update `self-hosted-infracost-api-key` in the `cloud-pricing-api` secret and restart the application.
   selfHostedInfracostAPIKey: ""
-
   # -- Set this to true to opt-out of telemetry
   disableTelemetry: false
   # -- Set this to debug, info, warn or error
