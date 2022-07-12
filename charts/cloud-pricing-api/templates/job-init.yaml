@@ -61,7 +61,7 @@ spec:
                   {{- if not .Values.existingSecretAPIKey }}
                   name: {{ include "cloud-pricing-api.fullname" . }}
                   {{- else }}
-                  name: {{ .Values.apiKey.existingSecret }}
+                  name: {{ .Values.existingSecretAPIKey }}
                   {{- end }}
                   key: infracost-api-key
             {{- if not .Values.api.disableSelfHostedInfracostAPIKey }}

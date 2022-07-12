@@ -106,7 +106,7 @@ postgresql:
   postgresqlDatabase: cloudpricingapi
   # -- Name of the PostgreSQL user
   postgresqlUsername: cloudpricingapi
-  # -- Details of external PostgreSQL server, such as AWS RDS, to use (assuming you've set postgresql.enabled to false)
+  # -- Details of external PostgreSQL server, such as AWS RDS, to use (assuming you've set postgresql.enabled to false. NOTE: In this case if existingSecret is set, it will be used for external.password)
   external: {}
   #   host:
   #   port:

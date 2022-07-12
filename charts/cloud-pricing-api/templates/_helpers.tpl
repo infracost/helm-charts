@@ -130,6 +130,10 @@ Get the PostgreSQL secret name
         {{- printf "%s" (include "cloud-pricing-api.postgresql.fullname" .) -}}
     {{- end -}}
 {{- else -}}
-    {{- printf "%s" (include "cloud-pricing-api.fullname" .) -}}
+    {{- if .Values.postgresql.existingSecret }}
+        {{- printf "%s" .Values.postgresql.existingSecret -}}
+    {{- else -}}
+      {{- printf "%s" (include "cloud-pricing-api.fullname" .) -}}
+    {{- end -}}
 {{- end -}}
 {{- end -}}
